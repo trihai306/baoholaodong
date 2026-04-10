@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
-  <path d="M24 6C14.06 6 6 13.42 6 22.5C6 27.57 8.58 32.08 12.7 35.1V42L19.36 38.33C20.84 38.73 22.39 38.95 24 38.95C33.94 38.95 42 31.53 42 22.48C42 13.42 33.94 6 24 6Z" fill="white"/>
-  <path d="M13 27L19.5 20L23 24L29.5 17.5" stroke="white" stroke-width="0"/>
-  <path d="M13.5 27.5L20 20.5L24 24.5L30.5 17.5" stroke="url(#grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <defs>
-    <linearGradient id="grad" x1="13" y1="27" x2="31" y2="17">
-      <stop stop-color="#FF6968"/>
-      <stop offset="0.5" stop-color="#A14EFC"/>
-      <stop offset="1" stop-color="#00AAFF"/>
-    </linearGradient>
-  </defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48"><path fill="#fff" d="M24 6C14.06 6 6 13.42 6 22.5C6 27.57 8.58 32.08 12.7 35.1V42L19.36 38.33C20.84 38.73 22.39 38.95 24 38.95C33.94 38.95 42 31.53 42 22.48C42 13.42 33.94 6 24 6Z"/><path stroke="#fff" stroke-width="0" d="M13 27L19.5 20L23 24L29.5 17.5"/><path stroke="url(#grad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13.5 27.5L20 20.5L24 24.5L30.5 17.5"/><defs><linearGradient id="grad" x1="13" x2="31" y1="27" y2="17"><stop stop-color="#FF6968"/><stop offset=".5" stop-color="#A14EFC"/><stop offset="1" stop-color="#0AF"/></linearGradient></defs></svg>
