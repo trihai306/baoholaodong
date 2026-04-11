@@ -66,39 +66,39 @@
 @push('seo')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "Article",
+    "@@context": "https://schema.org",
+    "@@type": "Article",
     "headline": "{{ $post->title }}",
     "description": "{{ $post->excerpt ?? Str::limit(strip_tags($post->content), 160) }}",
     "image": "{{ $post->image ? asset('storage/' . $post->image) : asset('images/logo.jpg') }}",
     "datePublished": "{{ $post->created_at->toIso8601String() }}",
     "dateModified": "{{ $post->updated_at->toIso8601String() }}",
     "author": {
-        "@type": "Organization",
+        "@@type": "Organization",
         "name": "Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh"
     },
     "publisher": {
-        "@type": "Organization",
+        "@@type": "Organization",
         "name": "Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh",
         "logo": {
-            "@type": "ImageObject",
+            "@@type": "ImageObject",
             "url": "{{ asset('images/logo.jpg') }}"
         }
     },
     "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ route('posts.show', $post->slug) }}"
+        "@@type": "WebPage",
+        "@@id": "{{ route('posts.show', $post->slug) }}"
     }
 }
 </script>
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
     "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "{{ route('home') }}"},
-        {"@type": "ListItem", "position": 2, "name": "Tin tức", "item": "{{ route('posts.index') }}"},
-        {"@type": "ListItem", "position": 3, "name": "{{ $post->title }}"}
+        {"@@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "{{ route('home') }}"},
+        {"@@type": "ListItem", "position": 2, "name": "Tin tức", "item": "{{ route('posts.index') }}"},
+        {"@@type": "ListItem", "position": 3, "name": "{{ $post->title }}"}
     ]
 }
 </script>

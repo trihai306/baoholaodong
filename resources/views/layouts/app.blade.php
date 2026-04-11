@@ -90,15 +90,15 @@
     {{-- JSON-LD Organization Schema --}}
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "Organization",
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
         "name": "Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh",
         "url": "https://locthinh.com",
         "logo": "{{ asset('images/logo.jpg') }}",
         "telephone": "+84964186111",
         "email": "thinhvtth.locthinh@gmail.com",
         "address": {
-            "@type": "PostalAddress",
+            "@@type": "PostalAddress",
             "streetAddress": "074 LK KĐT HUD Trầu Cau, P. Võ Cường",
             "addressLocality": "Bắc Ninh",
             "addressCountry": "VN"
