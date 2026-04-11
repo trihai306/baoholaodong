@@ -16,8 +16,36 @@ Route::get('/sitemap.xml', function () {
     $categories = Category::where('is_active', true)->select('slug', 'updated_at')->get();
     $posts = Post::where('is_published', true)->select('slug', 'updated_at')->get();
 
-    return response()->view('sitemap', compact('products', 'categories', 'posts'))
-        ->header('Content-Type', 'application/xml');
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+    $staticPages = [
+        ['loc' => route('home'), 'changefreq' => 'daily', 'priority' => '1.0'],
+        ['loc' => route('about'), 'changefreq' => 'monthly', 'priority' => '0.8'],
+        ['loc' => route('products.index'), 'changefreq' => 'weekly', 'priority' => '0.9'],
+        ['loc' => route('posts.index'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+        ['loc' => route('contact'), 'changefreq' => 'monthly', 'priority' => '0.7'],
+    ];
+
+    foreach ($staticPages as $page) {
+        $xml .= '<url><loc>' . $page['loc'] . '</loc><changefreq>' . $page['changefreq'] . '</changefreq><priority>' . $page['priority'] . '</priority></url>';
+    }
+
+    foreach ($categories as $cat) {
+        $xml .= '<url><loc>' . route('products.category', $cat->slug) . '</loc><lastmod>' . $cat->updated_at->toW3cString() . '</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>';
+    }
+
+    foreach ($products as $product) {
+        $xml .= '<url><loc>' . route('products.show', $product->slug) . '</loc><lastmod>' . $product->updated_at->toW3cString() . '</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>';
+    }
+
+    foreach ($posts as $post) {
+        $xml .= '<url><loc>' . route('posts.show', $post->slug) . '</loc><lastmod>' . $post->updated_at->toW3cString() . '</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>';
+    }
+
+    $xml .= '</urlset>';
+
+    return response($xml, 200)->header('Content-Type', 'application/xml');
 })->name('sitemap');
 
 // Frontend Routes
