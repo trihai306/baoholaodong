@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Bảo Hộ Lao Động - Trang Thiết Bị An Toàn Chất Lượng Cao')
+@section('meta_description', 'Lộc Thịnh - Đơn vị uy tín #1 cung cấp trang thiết bị bảo hộ lao động chất lượng cao: mũ bảo hộ, kính bảo hộ, găng tay, giày bảo hộ, quần áo bảo hộ. Hotline: 0964.186.111')
+@section('canonical', route('home'))
 
 @section('content')
     {{-- Hero Section --}}

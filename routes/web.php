@@ -5,7 +5,20 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+
+// Sitemap
+Route::get('/sitemap.xml', function () {
+    $products = Product::where('is_active', true)->select('slug', 'updated_at')->get();
+    $categories = Category::where('is_active', true)->select('slug', 'updated_at')->get();
+    $posts = Post::where('is_published', true)->select('slug', 'updated_at')->get();
+
+    return response()->view('sitemap', compact('products', 'categories', 'posts'))
+        ->header('Content-Type', 'application/xml');
+})->name('sitemap');
 
 // Frontend Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');

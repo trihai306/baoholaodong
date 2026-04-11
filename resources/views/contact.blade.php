@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Liên hệ - Bảo Hộ Lao Động')
+@section('meta_description', 'Liên hệ Công ty Lộc Thịnh để được tư vấn và báo giá trang thiết bị bảo hộ lao động. Địa chỉ: Bắc Ninh. Hotline: 0964.186.111. Email: thinhvtth.locthinh@gmail.com')
+@section('canonical', route('contact'))
 
 @section('breadcrumb')
 <nav class="flex text-sm" aria-label="Breadcrumb">

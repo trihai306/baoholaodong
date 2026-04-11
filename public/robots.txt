@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Disallow: /profile
+Disallow: /login
+Disallow: /register
+Disallow: /admin
+Disallow: /password
+
+Sitemap: https://locthinh.com/sitemap.xml

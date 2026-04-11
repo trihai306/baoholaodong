@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Giới thiệu - Bảo Hộ Lao Động')
+@section('meta_description', 'Giới thiệu Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh - Đơn vị chuyên cung cấp trang thiết bị bảo hộ lao động chính hãng, đạt tiêu chuẩn an toàn quốc tế tại Bắc Ninh.')
+@section('canonical', route('about'))
 
 @section('breadcrumb')
 <nav class="flex text-sm" aria-label="Breadcrumb">

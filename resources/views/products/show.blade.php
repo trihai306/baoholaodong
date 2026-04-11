@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', $product->name . ' - Bảo Hộ Lao Động')
+@section('meta_description', $product->short_description ?? 'Mua ' . $product->name . ' chính hãng tại Lộc Thịnh. Giá tốt, giao hàng toàn quốc. Hotline: 0964.186.111')
+@section('canonical', route('products.show', $product->slug))
+@section('og_type', 'product')
+@section('og_image', $product->image ? asset('storage/' . $product->image) : asset('images/logo.jpg'))
 
 @section('breadcrumb')
 <nav class="flex text-sm" aria-label="Breadcrumb">
@@ -176,3 +180,43 @@
     </div>
 </section>
 @endsection
+
+@push('seo')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "{{ $product->name }}",
+    "description": "{{ $product->short_description ?? $product->name }}",
+    "image": "{{ $product->image ? asset('storage/' . $product->image) : asset('images/logo.jpg') }}",
+    "sku": "{{ $product->sku ?? '' }}",
+    "brand": {
+        "@type": "Brand",
+        "name": "{{ $product->brand ?? 'Lộc Thịnh' }}"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "{{ route('products.show', $product->slug) }}",
+        "priceCurrency": "VND",
+        "price": "{{ $product->sale_price ?? $product->price }}",
+        "availability": "{{ $product->stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+        "seller": {
+            "@type": "Organization",
+            "name": "Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh"
+        }
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "{{ route('home') }}"},
+        {"@type": "ListItem", "position": 2, "name": "Sản phẩm", "item": "{{ route('products.index') }}"},
+        {"@type": "ListItem", "position": 3, "name": "{{ $product->category->name }}", "item": "{{ route('products.category', $product->category->slug) }}"},
+        {"@type": "ListItem", "position": 4, "name": "{{ $product->name }}"}
+    ]
+}
+</script>
+@endpush

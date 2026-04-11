@@ -4,8 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('meta_description', 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế')">
+    <meta name="robots" content="@yield('robots', 'index, follow')">
+    <meta name="description" content="@yield('meta_description', 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế. Hotline: 0964.186.111')">
     <title>@yield('title', 'Lộc Thịnh - Vật Tư Bảo Hộ Lao Động Chất Lượng Cao')</title>
+    <link rel="canonical" href="@yield('canonical', url()->current())">
+
+    {{-- Open Graph --}}
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="@yield('title', 'Lộc Thịnh - Vật Tư Bảo Hộ Lao Động Chất Lượng Cao')">
+    <meta property="og:description" content="@yield('meta_description', 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế. Hotline: 0964.186.111')">
+    <meta property="og:image" content="@yield('og_image', asset('images/logo.jpg'))">
+    <meta property="og:url" content="@yield('canonical', url()->current())">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="Lộc Thịnh - Bảo Hộ Lao Động">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', 'Lộc Thịnh - Vật Tư Bảo Hộ Lao Động Chất Lượng Cao')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế. Hotline: 0964.186.111')">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/logo.jpg'))">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -70,6 +87,26 @@
         .mega-menu { opacity: 0; visibility: hidden; transform: translateY(10px); transition: all .25s ease; }
         .mega-trigger:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
     </style>
+    {{-- JSON-LD Organization Schema --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh",
+        "url": "https://locthinh.com",
+        "logo": "{{ asset('images/logo.jpg') }}",
+        "telephone": "+84964186111",
+        "email": "thinhvtth.locthinh@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "074 LK KĐT HUD Trầu Cau, P. Võ Cường",
+            "addressLocality": "Bắc Ninh",
+            "addressCountry": "VN"
+        },
+        "sameAs": []
+    }
+    </script>
+    @stack('seo')
     @stack('styles')
 </head>
 <body class="font-sans antialiased text-dark-800 bg-white" x-data="{ mobileOpen: false }">

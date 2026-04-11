@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Tin tức & Kiến thức - Bảo Hộ Lao Động')
+@section('meta_description', 'Tin tức, kiến thức về bảo hộ lao động, an toàn lao động. Hướng dẫn chọn mua và sử dụng trang thiết bị bảo hộ đúng chuẩn từ Lộc Thịnh.')
+@section('canonical', route('posts.index'))
 
 @section('breadcrumb')
 <nav class="flex text-sm" aria-label="Breadcrumb">
@@ -26,7 +28,7 @@
             <article class="bg-white rounded-2xl overflow-hidden border border-secondary-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col">
                 <div class="aspect-video overflow-hidden">
                     @if($post->image)
-                        <img src="{{ asset('storage/' . $post->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ $post->title }}">
+                        <img src="{{ asset('storage/' . $post->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ $post->title }}" loading="lazy">
                     @else
                         <div class="w-full h-full bg-gradient-to-br from-secondary-100 to-secondary-200 flex items-center justify-center">
                             <i class="fas fa-newspaper text-5xl text-secondary-300"></i>

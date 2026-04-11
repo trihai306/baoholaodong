@@ -2,7 +2,7 @@
     <div class="bg-white rounded-2xl overflow-hidden border border-dark-100 card-hover h-full flex flex-col">
         <a href="{{ route('products.show', $product->slug) }}" class="block aspect-square overflow-hidden relative">
             @if($product->image)
-                <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="{{ $product->name }}">
+                <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="{{ $product->name }}" loading="lazy">
             @else
                 <div class="w-full h-full bg-gradient-to-br from-dark-50 to-dark-100 flex items-center justify-center">
                     <i class="fas fa-image text-4xl text-dark-200"></i>

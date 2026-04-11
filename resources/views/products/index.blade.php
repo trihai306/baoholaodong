@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Sản phẩm bảo hộ lao động - Đầy đủ các loại')
+@section('meta_description', 'Danh mục sản phẩm bảo hộ lao động chính hãng: mũ bảo hộ, kính bảo hộ, găng tay, giày bảo hộ, quần áo bảo hộ, khẩu trang, dây đai an toàn, thiết bị PCCC. Giá tốt nhất thị trường.')
+@section('canonical', route('products.index'))
 
 @section('breadcrumb')
 <nav class="flex text-sm" aria-label="Breadcrumb">
