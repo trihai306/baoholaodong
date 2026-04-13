@@ -6,6 +6,7 @@ use App\Filament\Resources\PostResource\Pages;
 use App\Models\Post;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
@@ -26,8 +27,8 @@ class PostResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Group::make()->schema([
-                Forms\Components\Section::make('Nội dung bài viết')->schema([
+            Schemas\Components\Group::make()->schema([
+                Schemas\Components\Section::make('Nội dung bài viết')->schema([
                     Forms\Components\TextInput::make('title')
                         ->label('Tiêu đề')
                         ->required()
@@ -48,8 +49,8 @@ class PostResource extends Resource
                 ])->columns(2),
             ])->columnSpan(['lg' => 2]),
 
-            Forms\Components\Group::make()->schema([
-                Forms\Components\Section::make('Thiết lập')->schema([
+            Schemas\Components\Group::make()->schema([
+                Schemas\Components\Section::make('Thiết lập')->schema([
                     Forms\Components\Select::make('type')
                         ->label('Loại')
                         ->options([
@@ -65,7 +66,7 @@ class PostResource extends Resource
                     Forms\Components\Hidden::make('user_id')
                         ->default(auth()->id()),
                 ]),
-                Forms\Components\Section::make('Hình ảnh')->schema([
+                Schemas\Components\Section::make('Hình ảnh')->schema([
                     Forms\Components\FileUpload::make('image')
                         ->label('Ảnh bìa')
                         ->image()

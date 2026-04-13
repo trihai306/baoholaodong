@@ -6,6 +6,7 @@ use App\Filament\Resources\ContactResource\Pages;
 use App\Models\Contact;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
@@ -35,7 +36,7 @@ class ContactResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make()->schema([
+            Schemas\Components\Section::make()->schema([
                 Forms\Components\TextInput::make('name')->label('Họ tên')->disabled(),
                 Forms\Components\TextInput::make('email')->label('Email')->disabled(),
                 Forms\Components\TextInput::make('phone')->label('Điện thoại')->disabled(),

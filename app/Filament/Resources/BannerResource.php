@@ -6,6 +6,7 @@ use App\Filament\Resources\BannerResource\Pages;
 use App\Models\Banner;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
@@ -25,7 +26,7 @@ class BannerResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make()->schema([
+            Schemas\Components\Section::make()->schema([
                 Forms\Components\TextInput::make('title')->label('Tiêu đề'),
                 Forms\Components\TextInput::make('link')->label('Liên kết')->url(),
                 Forms\Components\FileUpload::make('image')

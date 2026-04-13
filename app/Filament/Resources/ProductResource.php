@@ -6,6 +6,7 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
@@ -26,8 +27,8 @@ class ProductResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Group::make()->schema([
-                Forms\Components\Section::make('Thông tin cơ bản')->schema([
+            Schemas\Components\Group::make()->schema([
+                Schemas\Components\Section::make('Thông tin cơ bản')->schema([
                     Forms\Components\TextInput::make('name')
                         ->label('Tên sản phẩm')
                         ->required()
@@ -49,7 +50,7 @@ class ProductResource extends Resource
                         ->unique(ignoreRecord: true),
                 ])->columns(2),
 
-                Forms\Components\Section::make('Mô tả')->schema([
+                Schemas\Components\Section::make('Mô tả')->schema([
                     Forms\Components\Textarea::make('short_description')
                         ->label('Mô tả ngắn')
                         ->rows(2),
@@ -58,7 +59,7 @@ class ProductResource extends Resource
                         ->columnSpanFull(),
                 ]),
 
-                Forms\Components\Section::make('Thông số kỹ thuật')->schema([
+                Schemas\Components\Section::make('Thông số kỹ thuật')->schema([
                     Forms\Components\TextInput::make('brand')->label('Thương hiệu'),
                     Forms\Components\TextInput::make('origin')->label('Xuất xứ'),
                     Forms\Components\TextInput::make('material')->label('Chất liệu'),
@@ -66,8 +67,8 @@ class ProductResource extends Resource
                 ])->columns(2),
             ])->columnSpan(['lg' => 2]),
 
-            Forms\Components\Group::make()->schema([
-                Forms\Components\Section::make('Giá & Kho')->schema([
+            Schemas\Components\Group::make()->schema([
+                Schemas\Components\Section::make('Giá & Kho')->schema([
                     Forms\Components\TextInput::make('price')
                         ->label('Giá (VNĐ)')
                         ->required()
@@ -83,7 +84,7 @@ class ProductResource extends Resource
                         ->default(0),
                 ]),
 
-                Forms\Components\Section::make('Hình ảnh')->schema([
+                Schemas\Components\Section::make('Hình ảnh')->schema([
                     Forms\Components\FileUpload::make('image')
                         ->label('Ảnh đại diện')
                         ->image()
@@ -91,7 +92,7 @@ class ProductResource extends Resource
                         ->imageEditor(),
                 ]),
 
-                Forms\Components\Section::make('Trạng thái')->schema([
+                Schemas\Components\Section::make('Trạng thái')->schema([
                     Forms\Components\Toggle::make('is_active')
                         ->label('Hiển thị')
                         ->default(true),

@@ -6,6 +6,7 @@ use App\Filament\Resources\CategoryResource\Pages;
 use App\Models\Category;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
@@ -26,7 +27,7 @@ class CategoryResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make('Thông tin danh mục')->schema([
+            Schemas\Components\Section::make('Thông tin danh mục')->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Tên danh mục')
                     ->required()
