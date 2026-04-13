@@ -34,7 +34,7 @@ class ProductResource extends Resource
                         ->required()
                         ->maxLength(255)
                         ->live(onBlur: true)
-                        ->afterStateUpdated(fn (Forms\Set $set, ?string $state) => $set('slug', Str::slug($state) . '-' . Str::random(5))),
+                        ->afterStateUpdated(fn (Schemas\Components\Utilities\Set $set, ?string $state) => $set('slug', Str::slug($state) . '-' . Str::random(5))),
                     Forms\Components\TextInput::make('slug')
                         ->label('Slug')
                         ->required()
