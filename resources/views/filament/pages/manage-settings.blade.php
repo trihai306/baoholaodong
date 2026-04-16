@@ -1,11 +1,11 @@
 <x-filament-panels::page>
-    <x-filament-panels::form wire:submit="save">
+    <form wire:submit="save">
         {{ $this->form }}
 
-        <div class="fi-form-actions">
+        <div class="mt-6 flex justify-start">
             <x-filament::button type="submit" icon="heroicon-o-check">
                 Lưu cài đặt
             </x-filament::button>
         </div>
-    </x-filament-panels::form>
+    </form>
 </x-filament-panels::page>
