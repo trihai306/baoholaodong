@@ -88,6 +88,7 @@ class ProductResource extends Resource
                     Forms\Components\FileUpload::make('image')
                         ->label('Ảnh đại diện')
                         ->image()
+                        ->disk('public')
                         ->directory('products')
                         ->imageEditor(),
                 ]),
@@ -107,7 +108,7 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')->label('Ảnh')->square()->size(50),
+                Tables\Columns\ImageColumn::make('image')->label('Ảnh')->disk('public')->square()->size(50),
                 Tables\Columns\TextColumn::make('name')->label('Tên sản phẩm')->searchable()->sortable()->limit(40),
                 Tables\Columns\TextColumn::make('category.name')->label('Danh mục')->sortable(),
                 Tables\Columns\TextColumn::make('price')->label('Giá')->money('VND', locale: 'vi')->sortable(),

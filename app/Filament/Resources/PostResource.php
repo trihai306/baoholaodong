@@ -70,6 +70,7 @@ class PostResource extends Resource
                     Forms\Components\FileUpload::make('image')
                         ->label('Ảnh bìa')
                         ->image()
+                        ->disk('public')
                         ->directory('posts')
                         ->imageEditor(),
                 ]),
@@ -81,7 +82,7 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')->label('Ảnh')->square()->size(50),
+                Tables\Columns\ImageColumn::make('image')->label('Ảnh')->disk('public')->square()->size(50),
                 Tables\Columns\TextColumn::make('title')->label('Tiêu đề')->searchable()->sortable()->limit(50),
                 Tables\Columns\BadgeColumn::make('type')->label('Loại')
                     ->colors(['primary' => 'blog', 'info' => 'news', 'warning' => 'page']),

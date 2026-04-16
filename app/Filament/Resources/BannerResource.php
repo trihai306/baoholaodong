@@ -33,6 +33,7 @@ class BannerResource extends Resource
                     ->label('Hình ảnh')
                     ->image()
                     ->required()
+                    ->disk('public')
                     ->directory('banners'),
                 Forms\Components\TextInput::make('sort_order')->label('Thứ tự')->numeric()->default(0),
                 Forms\Components\Toggle::make('is_active')->label('Hiển thị')->default(true),
@@ -44,7 +45,7 @@ class BannerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')->label('Ảnh')->height(60),
+                Tables\Columns\ImageColumn::make('image')->label('Ảnh')->disk('public')->height(60),
                 Tables\Columns\TextColumn::make('title')->label('Tiêu đề')->placeholder('-'),
                 Tables\Columns\TextColumn::make('link')->label('Liên kết')->limit(30)->placeholder('-'),
                 Tables\Columns\TextColumn::make('sort_order')->label('Thứ tự')->sortable(),

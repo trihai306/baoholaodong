@@ -50,6 +50,7 @@ class CategoryResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('Hình ảnh')
                     ->image()
+                    ->disk('public')
                     ->directory('categories'),
                 Forms\Components\TextInput::make('sort_order')
                     ->label('Thứ tự')
@@ -66,7 +67,7 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')->label('Ảnh')->circular(),
+                Tables\Columns\ImageColumn::make('image')->label('Ảnh')->disk('public')->circular(),
                 Tables\Columns\TextColumn::make('name')->label('Tên')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('parent.name')->label('Danh mục cha')->placeholder('-'),
                 Tables\Columns\TextColumn::make('products_count')->counts('products')->label('Sản phẩm'),
