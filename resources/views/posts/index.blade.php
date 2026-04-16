@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Tin tức & Kiến thức - Bảo Hộ Lao Động')
-@section('meta_description', 'Tin tức, kiến thức về bảo hộ lao động, an toàn lao động. Hướng dẫn chọn mua và sử dụng trang thiết bị bảo hộ đúng chuẩn từ Lộc Thịnh.')
+@section('meta_description', 'Tin tức, kiến thức về bảo hộ lao động, an toàn lao động. Hướng dẫn chọn mua và sử dụng trang thiết bị bảo hộ đúng chuẩn từ ' . ($setting['company_short_name'] ?? 'Lộc Thịnh') . '.')
 @section('canonical', route('posts.index'))
 
 @section('breadcrumb')

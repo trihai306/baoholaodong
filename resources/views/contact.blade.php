@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Liên hệ - Bảo Hộ Lao Động')
-@section('meta_description', 'Liên hệ Công ty Lộc Thịnh để được tư vấn và báo giá trang thiết bị bảo hộ lao động. Địa chỉ: Bắc Ninh. Hotline: 0964.186.111. Email: thinhvtth.locthinh@gmail.com')
+@section('meta_description', 'Liên hệ ' . ($setting['company_short_name'] ?? 'Lộc Thịnh') . ' để được tư vấn và báo giá trang thiết bị bảo hộ lao động. Địa chỉ: ' . ($setting['address_city'] ?? 'Bắc Ninh') . '. Hotline: ' . ($setting['phone_primary_display'] ?? '0964.186.111') . '. Email: ' . ($setting['email'] ?? ''))
 @section('canonical', route('contact'))
 
 @section('breadcrumb')
@@ -34,12 +34,12 @@
             {{-- Contact Info --}}
             <div class="space-y-6">
                 @foreach([
-                    ['icon' => 'fa-building', 'bg' => 'bg-blue-50', 'iconColor' => 'text-blue-500', 'title' => 'Công ty', 'content' => 'CÔNG TY TNHH VẬT TƯ TỔNG HỢP LỘC THỊNH (MST: 2301394954)'],
-                    ['icon' => 'fa-map-marker-alt', 'bg' => 'bg-indigo-50', 'iconColor' => 'text-indigo-500', 'title' => 'VP Đại diện', 'content' => '074 LK KĐT HUD Trầu Cau, P. Võ Cường, Tỉnh Bắc Ninh'],
-                    ['icon' => 'fa-phone-alt', 'bg' => 'bg-green-50', 'iconColor' => 'text-green-500', 'title' => 'Điện thoại', 'content' => '0964.186.111 / 0972.998.444', 'link' => 'tel:0964186111'],
-                    ['icon' => 'fa-envelope', 'bg' => 'bg-primary-50', 'iconColor' => 'text-primary-500', 'title' => 'Email', 'content' => 'thinhvtth.locthinh@gmail.com', 'link' => 'mailto:thinhvtth.locthinh@gmail.com'],
-                    ['icon' => 'fa-globe', 'bg' => 'bg-cyan-50', 'iconColor' => 'text-cyan-500', 'title' => 'Website', 'content' => 'www.locthinh.com'],
-                    ['icon' => 'fa-clock', 'bg' => 'bg-purple-50', 'iconColor' => 'text-purple-500', 'title' => 'Giờ làm việc', 'content' => 'Thứ 2 - Thứ 7: 8:00 - 17:30'],
+                    ['icon' => 'fa-building', 'bg' => 'bg-blue-50', 'iconColor' => 'text-blue-500', 'title' => 'Công ty', 'content' => Str::upper($setting['company_name'] ?? '') . ' (MST: ' . ($setting['tax_code'] ?? '') . ')'],
+                    ['icon' => 'fa-map-marker-alt', 'bg' => 'bg-indigo-50', 'iconColor' => 'text-indigo-500', 'title' => 'VP Đại diện', 'content' => $setting['address_office'] ?? ''],
+                    ['icon' => 'fa-phone-alt', 'bg' => 'bg-green-50', 'iconColor' => 'text-green-500', 'title' => 'Điện thoại', 'content' => ($setting['phone_primary_display'] ?? '') . ' / ' . ($setting['phone_secondary_display'] ?? ''), 'link' => 'tel:' . ($setting['phone_primary'] ?? '')],
+                    ['icon' => 'fa-envelope', 'bg' => 'bg-primary-50', 'iconColor' => 'text-primary-500', 'title' => 'Email', 'content' => $setting['email'] ?? '', 'link' => 'mailto:' . ($setting['email'] ?? '')],
+                    ['icon' => 'fa-globe', 'bg' => 'bg-cyan-50', 'iconColor' => 'text-cyan-500', 'title' => 'Website', 'content' => $setting['website'] ?? ''],
+                    ['icon' => 'fa-clock', 'bg' => 'bg-purple-50', 'iconColor' => 'text-purple-500', 'title' => 'Giờ làm việc', 'content' => $setting['working_hours'] ?? ''],
                 ] as $info)
                 <div class="bg-white rounded-2xl border border-secondary-100 p-6 flex items-start space-x-4 hover:shadow-lg transition-shadow">
                     <div class="w-12 h-12 {{ $info['bg'] }} rounded-xl flex items-center justify-center shrink-0">

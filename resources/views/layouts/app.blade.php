@@ -5,24 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="@yield('robots', 'index, follow')">
-    <meta name="description" content="@yield('meta_description', 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế. Hotline: 0964.186.111')">
-    <title>@yield('title', 'Lộc Thịnh - Vật Tư Bảo Hộ Lao Động Chất Lượng Cao')</title>
+    @hasSection('meta_description')
+    <meta name="description" content="@yield('meta_description')">
+    @else
+    <meta name="description" content="{{ $setting['company_name'] ?? 'Lộc Thịnh' }} - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế. Hotline: {{ $setting['phone_primary_display'] ?? '0964.186.111' }}">
+    @endif
+    <title>@yield('title', ($setting['company_short_name'] ?? 'Lộc Thịnh') . ' - ' . ($setting['company_slogan'] ?? 'Vật Tư Bảo Hộ Lao Động Chất Lượng Cao'))</title>
     <link rel="canonical" href="@yield('canonical', url()->current())">
 
     {{-- Open Graph --}}
     <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:title" content="@yield('title', 'Lộc Thịnh - Vật Tư Bảo Hộ Lao Động Chất Lượng Cao')">
-    <meta property="og:description" content="@yield('meta_description', 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế. Hotline: 0964.186.111')">
-    <meta property="og:image" content="@yield('og_image', asset('images/logo.jpg'))">
+    <meta property="og:title" content="@yield('title', ($setting['company_short_name'] ?? 'Lộc Thịnh') . ' - ' . ($setting['company_slogan'] ?? 'Vật Tư Bảo Hộ Lao Động Chất Lượng Cao'))">
+    @hasSection('meta_description')
+    <meta property="og:description" content="@yield('meta_description')">
+    @else
+    <meta property="og:description" content="{{ $setting['company_name'] ?? 'Lộc Thịnh' }} - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế. Hotline: {{ $setting['phone_primary_display'] ?? '0964.186.111' }}">
+    @endif
+    <meta property="og:image" content="@yield('og_image', asset(($setting['logo'] ?? null) ? 'storage/'.$setting['logo'] : 'images/logo.jpg'))">
     <meta property="og:url" content="@yield('canonical', url()->current())">
     <meta property="og:locale" content="vi_VN">
-    <meta property="og:site_name" content="Lộc Thịnh - Bảo Hộ Lao Động">
+    <meta property="og:site_name" content="{{ $setting['company_short_name'] ?? 'Lộc Thịnh' }} - Bảo Hộ Lao Động">
 
     {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', 'Lộc Thịnh - Vật Tư Bảo Hộ Lao Động Chất Lượng Cao')">
-    <meta name="twitter:description" content="@yield('meta_description', 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế. Hotline: 0964.186.111')">
-    <meta name="twitter:image" content="@yield('og_image', asset('images/logo.jpg'))">
+    <meta name="twitter:title" content="@yield('title', ($setting['company_short_name'] ?? 'Lộc Thịnh') . ' - ' . ($setting['company_slogan'] ?? 'Vật Tư Bảo Hộ Lao Động Chất Lượng Cao'))">
+    @hasSection('meta_description')
+    <meta name="twitter:description" content="@yield('meta_description')">
+    @else
+    <meta name="twitter:description" content="{{ $setting['company_name'] ?? 'Lộc Thịnh' }} - Chuyên cung cấp trang thiết bị bảo hộ lao động chất lượng cao, đạt tiêu chuẩn quốc tế. Hotline: {{ $setting['phone_primary_display'] ?? '0964.186.111' }}">
+    @endif
+    <meta name="twitter:image" content="@yield('og_image', asset(($setting['logo'] ?? null) ? 'storage/'.$setting['logo'] : 'images/logo.jpg'))">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -92,18 +104,20 @@
     {
         "@@context": "https://schema.org",
         "@@type": "Organization",
-        "name": "Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh",
-        "url": "https://locthinh.com",
-        "logo": "{{ asset('images/logo.jpg') }}",
-        "telephone": "+84964186111",
-        "email": "thinhvtth.locthinh@gmail.com",
+        "name": "{{ $setting['company_name'] ?? 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh' }}",
+        "url": "{{ url('/') }}",
+        "logo": "{{ asset(($setting['logo'] ?? null) ? 'storage/'.$setting['logo'] : 'images/logo.jpg') }}",
+        "telephone": "+84{{ ltrim($setting['phone_primary'] ?? '0964186111', '0') }}",
+        "email": "{{ $setting['email'] ?? '' }}",
         "address": {
             "@@type": "PostalAddress",
-            "streetAddress": "074 LK KĐT HUD Trầu Cau, P. Võ Cường",
-            "addressLocality": "Bắc Ninh",
+            "streetAddress": "{{ $setting['address_office'] ?? '' }}",
+            "addressLocality": "{{ $setting['address_city'] ?? 'Bắc Ninh' }}",
             "addressCountry": "VN"
         },
-        "sameAs": []
+        "sameAs": [
+            @if(($setting['facebook_url'] ?? '#') !== '#')"{{ $setting['facebook_url'] }}"@endif
+        ]
     }
     </script>
     @stack('seo')
@@ -121,22 +135,22 @@
     {{-- Floating Contact Buttons --}}
     <div class="fixed bottom-6 left-6 z-50 flex flex-col space-y-3">
         {{-- Zalo --}}
-        <a href="https://zalo.me/0964186111" target="_blank"
+        <a href="https://zalo.me/{{ $setting['zalo_phone'] ?? '0964186111' }}" target="_blank"
            class="w-[60px] h-[60px] rounded-full overflow-hidden shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all hover:scale-110 group relative">
             <img src="{{ asset('images/zalo-icon.png') }}" alt="Zalo" class="w-full h-full object-contain bg-white p-2.5">
             <span class="absolute left-full ml-3 bg-dark-800 text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none">Chat Zalo</span>
         </a>
         {{-- Facebook Messenger --}}
-        <a href="https://m.me/locthinh.vn" target="_blank"
+        <a href="https://m.me/{{ $setting['facebook_messenger'] ?? 'locthinh.vn' }}" target="_blank"
            class="w-[60px] h-[60px] rounded-full overflow-hidden shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all hover:scale-110 group relative">
             <img src="{{ asset('images/messenger-icon.png') }}" alt="Messenger" class="w-full h-full object-cover">
             <span class="absolute left-full ml-3 bg-dark-800 text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none">Chat Messenger</span>
         </a>
         {{-- Phone --}}
-        <a href="tel:0964186111"
+        <a href="tel:{{ $setting['phone_primary'] ?? '0964186111' }}"
            class="w-[60px] h-[60px] rounded-full overflow-hidden shadow-lg shadow-blue-400/30 hover:shadow-blue-400/50 transition-all hover:scale-110 animate-pulse-slow group relative">
             <img src="{{ asset('images/phone-icon.png') }}" alt="Gọi điện" class="w-full h-full object-cover">
-            <span class="absolute left-full ml-3 bg-dark-800 text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none">0964.186.111</span>
+            <span class="absolute left-full ml-3 bg-dark-800 text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none">{{ $setting['phone_primary_display'] ?? '0964.186.111' }}</span>
         </a>
     </div>
 
@@ -150,16 +164,16 @@
     <div class="bg-dark-900 text-dark-400 text-xs hidden lg:block">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex justify-between items-center">
             <div class="flex items-center divide-x divide-dark-700">
-                <a href="tel:0964186111" class="hover:text-primary-400 transition pr-5 flex items-center"><i class="fas fa-phone-alt mr-1.5 text-primary-500"></i>Hotline: <strong class="ml-1 text-white">0964.186.111</strong></a>
-                <a href="mailto:thinhvtth.locthinh@gmail.com" class="hover:text-primary-400 transition px-5 flex items-center"><i class="fas fa-envelope mr-1.5 text-primary-500"></i>thinhvtth.locthinh@gmail.com</a>
-                <span class="px-5 flex items-center"><i class="fas fa-map-marker-alt mr-1.5 text-primary-500"></i>074 LK KĐT HUD Trầu Cau, Võ Cường, Bắc Ninh</span>
+                <a href="tel:{{ $setting['phone_primary'] ?? '0964186111' }}" class="hover:text-primary-400 transition pr-5 flex items-center"><i class="fas fa-phone-alt mr-1.5 text-primary-500"></i>Hotline: <strong class="ml-1 text-white">{{ $setting['phone_primary_display'] ?? '0964.186.111' }}</strong></a>
+                <a href="mailto:{{ $setting['email'] ?? '' }}" class="hover:text-primary-400 transition px-5 flex items-center"><i class="fas fa-envelope mr-1.5 text-primary-500"></i>{{ $setting['email'] ?? '' }}</a>
+                <span class="px-5 flex items-center"><i class="fas fa-map-marker-alt mr-1.5 text-primary-500"></i>{{ $setting['address_office'] ?? '' }}</span>
             </div>
             <div class="flex items-center space-x-4">
-                <span class="flex items-center"><i class="far fa-clock mr-1.5 text-primary-500"></i>T2 - T7: 8:00 - 17:30</span>
+                <span class="flex items-center"><i class="far fa-clock mr-1.5 text-primary-500"></i>{{ $setting['working_hours'] ?? 'T2 - T7: 8:00 - 17:30' }}</span>
                 <div class="flex items-center space-x-2 ml-4 pl-4 border-l border-dark-700">
-                    <a href="#" class="w-7 h-7 bg-dark-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition text-[10px]"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="w-7 h-7 bg-dark-800 hover:bg-red-500 rounded-full flex items-center justify-center transition text-[10px]"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="w-7 h-7 bg-dark-800 hover:bg-pink-500 rounded-full flex items-center justify-center transition text-[10px]"><i class="fab fa-tiktok"></i></a>
+                    <a href="{{ $setting['facebook_url'] ?? '#' }}" class="w-7 h-7 bg-dark-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition text-[10px]"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{ $setting['youtube_url'] ?? '#' }}" class="w-7 h-7 bg-dark-800 hover:bg-red-500 rounded-full flex items-center justify-center transition text-[10px]"><i class="fab fa-youtube"></i></a>
+                    <a href="{{ $setting['tiktok_url'] ?? '#' }}" class="w-7 h-7 bg-dark-800 hover:bg-pink-500 rounded-full flex items-center justify-center transition text-[10px]"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
@@ -171,7 +185,11 @@
             <div class="flex items-center justify-between h-16 lg:h-[72px]">
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center group shrink-0">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Lộc Thịnh" class="h-12 lg:h-14 w-auto object-contain">
+                    @if($setting['logo'] ?? null)
+                        <img src="{{ asset('storage/'.$setting['logo']) }}" alt="{{ $setting['company_short_name'] ?? 'Lộc Thịnh' }}" class="h-12 lg:h-14 w-auto object-contain">
+                    @else
+                        <img src="{{ asset('images/logo.jpg') }}" alt="{{ $setting['company_short_name'] ?? 'Lộc Thịnh' }}" class="h-12 lg:h-14 w-auto object-contain">
+                    @endif
                 </a>
 
                 {{-- Desktop Nav --}}
@@ -240,7 +258,7 @@
                     <button @click="searchOpen = !searchOpen" class="w-10 h-10 rounded-xl text-dark-400 hover:text-primary-500 hover:bg-primary-50 flex items-center justify-center transition">
                         <i class="fas fa-search"></i>
                     </button>
-                    <a href="tel:0964186111" class="hidden md:inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white text-[13px] font-bold rounded-xl transition-all shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:-translate-y-0.5">
+                    <a href="tel:{{ $setting['phone_primary'] ?? '0964186111' }}" class="hidden md:inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white text-[13px] font-bold rounded-xl transition-all shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:-translate-y-0.5">
                         <i class="fas fa-phone-alt mr-2 text-xs"></i>Báo giá ngay
                     </a>
                     <button @click="mobileOpen = !mobileOpen" class="lg:hidden w-10 h-10 rounded-xl text-dark-500 hover:bg-dark-100 flex items-center justify-center transition">
@@ -287,8 +305,8 @@
                     <i class="fas fa-envelope w-6 text-dark-400"></i>Liên hệ
                 </a>
                 <div class="pt-3">
-                    <a href="tel:0964186111" class="flex items-center justify-center px-4 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-bold rounded-xl">
-                        <i class="fas fa-phone-alt mr-2"></i>0964.186.111
+                    <a href="tel:{{ $setting['phone_primary'] ?? '0964186111' }}" class="flex items-center justify-center px-4 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-bold rounded-xl">
+                        <i class="fas fa-phone-alt mr-2"></i>{{ $setting['phone_primary_display'] ?? '0964.186.111' }}
                     </a>
                 </div>
             </div>
@@ -333,14 +351,26 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
                     <div class="lg:col-span-4">
                         <div class="mb-6">
-                            <img src="{{ asset('images/logo.jpg') }}" alt="Lộc Thịnh" class="h-16 w-auto object-contain bg-white rounded-xl p-1.5">
+                            @if($setting['logo'] ?? null)
+                                <img src="{{ asset('storage/'.$setting['logo']) }}" alt="{{ $setting['company_short_name'] ?? 'Lộc Thịnh' }}" class="h-16 w-auto object-contain bg-white rounded-xl p-1.5">
+                            @else
+                                <img src="{{ asset('images/logo.jpg') }}" alt="{{ $setting['company_short_name'] ?? 'Lộc Thịnh' }}" class="h-16 w-auto object-contain bg-white rounded-xl p-1.5">
+                            @endif
                         </div>
-                        <p class="text-dark-400 text-sm leading-relaxed mb-4">CÔNG TY TNHH VẬT TƯ TỔNG HỢP LỘC THỊNH</p>
-                        <p class="text-dark-500 text-xs mb-1"><i class="fas fa-id-card mr-1.5 text-primary-500"></i>MST: 2301394954</p>
+                        <p class="text-dark-400 text-sm leading-relaxed mb-4">{{ Str::upper($setting['company_name'] ?? 'CÔNG TY TNHH VẬT TƯ TỔNG HỢP LỘC THỊNH') }}</p>
+                        <p class="text-dark-500 text-xs mb-1"><i class="fas fa-id-card mr-1.5 text-primary-500"></i>MST: {{ $setting['tax_code'] ?? '2301394954' }}</p>
                         <p class="text-dark-400 text-sm leading-relaxed mb-6">Chuyên cung cấp trang thiết bị bảo hộ lao động chính hãng, chất lượng cao, đạt tiêu chuẩn an toàn quốc tế.</p>
                         <div class="flex space-x-2">
-                            @foreach(['facebook-f' => 'hover:bg-blue-500', 'youtube' => 'hover:bg-red-500', 'tiktok' => 'hover:bg-pink-500', 'instagram' => 'hover:bg-purple-500'] as $icon => $color)
-                            <a href="#" class="w-10 h-10 bg-dark-800 {{ $color }} rounded-xl flex items-center justify-center transition text-dark-400 hover:text-white text-sm"><i class="fab fa-{{ $icon }}"></i></a>
+                            @php
+                                $socialIcons = [
+                                    'facebook-f' => ['url' => $setting['facebook_url'] ?? '#', 'color' => 'hover:bg-blue-500'],
+                                    'youtube' => ['url' => $setting['youtube_url'] ?? '#', 'color' => 'hover:bg-red-500'],
+                                    'tiktok' => ['url' => $setting['tiktok_url'] ?? '#', 'color' => 'hover:bg-pink-500'],
+                                    'instagram' => ['url' => $setting['instagram_url'] ?? '#', 'color' => 'hover:bg-purple-500'],
+                                ];
+                            @endphp
+                            @foreach($socialIcons as $icon => $data)
+                            <a href="{{ $data['url'] }}" class="w-10 h-10 bg-dark-800 {{ $data['color'] }} rounded-xl flex items-center justify-center transition text-dark-400 hover:text-white text-sm" target="_blank"><i class="fab fa-{{ $icon }}"></i></a>
                             @endforeach
                         </div>
                     </div>
@@ -368,23 +398,23 @@
                         <ul class="space-y-4">
                             <li class="flex items-start">
                                 <div class="w-9 h-9 bg-dark-800 rounded-lg flex items-center justify-center mr-3 mt-0.5 shrink-0"><i class="fas fa-building text-primary-500 text-xs"></i></div>
-                                <div class="text-sm"><div class="text-dark-500 text-xs mb-0.5">Trụ sở</div><span>Tổ dân phố Bình Cầu, Phường Mão Điền, Tỉnh Bắc Ninh</span></div>
+                                <div class="text-sm"><div class="text-dark-500 text-xs mb-0.5">Trụ sở</div><span>{{ $setting['address_hq'] ?? '' }}</span></div>
                             </li>
                             <li class="flex items-start">
                                 <div class="w-9 h-9 bg-dark-800 rounded-lg flex items-center justify-center mr-3 mt-0.5 shrink-0"><i class="fas fa-map-marker-alt text-primary-500 text-xs"></i></div>
-                                <div class="text-sm"><div class="text-dark-500 text-xs mb-0.5">VP Đại diện</div><span>074 LK KĐT HUD Trầu Cau,<br>P. Võ Cường, Bắc Ninh</span></div>
+                                <div class="text-sm"><div class="text-dark-500 text-xs mb-0.5">VP Đại diện</div><span>{{ $setting['address_office'] ?? '' }}</span></div>
                             </li>
                             <li class="flex items-center">
                                 <div class="w-9 h-9 bg-dark-800 rounded-lg flex items-center justify-center mr-3 shrink-0"><i class="fas fa-phone text-primary-500 text-xs"></i></div>
-                                <div class="text-sm"><div class="text-dark-500 text-xs">Hotline</div><a href="tel:0964186111" class="text-white font-semibold hover:text-primary-400 transition">0964.186.111</a> / <a href="tel:0972998444" class="text-white font-semibold hover:text-primary-400 transition">0972.998.444</a></div>
+                                <div class="text-sm"><div class="text-dark-500 text-xs">Hotline</div><a href="tel:{{ $setting['phone_primary'] ?? '' }}" class="text-white font-semibold hover:text-primary-400 transition">{{ $setting['phone_primary_display'] ?? '' }}</a> / <a href="tel:{{ $setting['phone_secondary'] ?? '' }}" class="text-white font-semibold hover:text-primary-400 transition">{{ $setting['phone_secondary_display'] ?? '' }}</a></div>
                             </li>
                             <li class="flex items-center">
                                 <div class="w-9 h-9 bg-dark-800 rounded-lg flex items-center justify-center mr-3 shrink-0"><i class="fas fa-envelope text-primary-500 text-xs"></i></div>
-                                <div class="text-sm"><div class="text-dark-500 text-xs">Email</div><a href="mailto:thinhvtth.locthinh@gmail.com" class="text-white font-semibold hover:text-primary-400 transition">thinhvtth.locthinh@gmail.com</a></div>
+                                <div class="text-sm"><div class="text-dark-500 text-xs">Email</div><a href="mailto:{{ $setting['email'] ?? '' }}" class="text-white font-semibold hover:text-primary-400 transition">{{ $setting['email'] ?? '' }}</a></div>
                             </li>
                             <li class="flex items-center">
                                 <div class="w-9 h-9 bg-dark-800 rounded-lg flex items-center justify-center mr-3 shrink-0"><i class="fas fa-globe text-primary-500 text-xs"></i></div>
-                                <div class="text-sm"><div class="text-dark-500 text-xs">Website</div><span class="text-white font-semibold">www.locthinh.com</span></div>
+                                <div class="text-sm"><div class="text-dark-500 text-xs">Website</div><span class="text-white font-semibold">{{ $setting['website'] ?? '' }}</span></div>
                             </li>
                         </ul>
                     </div>
@@ -394,8 +424,8 @@
             {{-- Bottom --}}
             <div class="border-t border-dark-800/50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center text-xs text-dark-500">
-                    <p>&copy; {{ date('Y') }} Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh. All rights reserved.</p>
-                    <p class="mt-2 md:mt-0">MST: 2301394954 | <span class="text-primary-500 font-semibold">www.locthinh.com</span></p>
+                    <p>&copy; {{ date('Y') }} {{ $setting['company_name'] ?? 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh' }}. All rights reserved.</p>
+                    <p class="mt-2 md:mt-0">MST: {{ $setting['tax_code'] ?? '2301394954' }} | <span class="text-primary-500 font-semibold">{{ $setting['website'] ?? 'www.locthinh.com' }}</span></p>
                 </div>
             </div>
         </div>

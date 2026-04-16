@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $product->name . ' - Bảo Hộ Lao Động')
-@section('meta_description', $product->short_description ?? 'Mua ' . $product->name . ' chính hãng tại Lộc Thịnh. Giá tốt, giao hàng toàn quốc. Hotline: 0964.186.111')
+@section('meta_description', $product->short_description ?? 'Mua ' . $product->name . ' chính hãng tại ' . ($setting['company_short_name'] ?? 'Lộc Thịnh') . '. Giá tốt, giao hàng toàn quốc. Hotline: ' . ($setting['phone_primary_display'] ?? '0964.186.111'))
 @section('canonical', route('products.show', $product->slug))
 @section('og_type', 'product')
 @section('og_image', $product->image ? asset('storage/' . $product->image) : asset('images/logo.jpg'))
@@ -110,10 +110,10 @@
 
                     {{-- CTA --}}
                     <div class="flex flex-wrap gap-3 mb-6">
-                        <a href="tel:0964186111" class="flex-1 min-w-[180px] inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold rounded-2xl transition-all shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:-translate-y-0.5">
+                        <a href="tel:{{ $setting['phone_primary'] ?? '0964186111' }}" class="flex-1 min-w-[180px] inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold rounded-2xl transition-all shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:-translate-y-0.5">
                             <i class="fas fa-phone-alt mr-2.5"></i>Gọi đặt hàng
                         </a>
-                        <a href="https://zalo.me/0964186111" target="_blank" class="flex-1 min-w-[180px] inline-flex items-center justify-center px-6 py-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-500/20">
+                        <a href="https://zalo.me/{{ $setting['zalo_phone'] ?? '0964186111' }}" target="_blank" class="flex-1 min-w-[180px] inline-flex items-center justify-center px-6 py-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-500/20">
                             <i class="fas fa-comment-dots mr-2.5"></i>Chat Zalo
                         </a>
                         <a href="{{ route('contact') }}" class="flex-1 min-w-[180px] inline-flex items-center justify-center px-6 py-4 bg-dark-100 hover:bg-dark-200 text-dark-700 font-bold rounded-2xl transition">
@@ -192,7 +192,7 @@
     "sku": "{{ $product->sku ?? '' }}",
     "brand": {
         "@@type": "Brand",
-        "name": "{{ $product->brand ?? 'Lộc Thịnh' }}"
+        "name": "{{ $product->brand ?? ($setting['company_short_name'] ?? 'Lộc Thịnh') }}"
     },
     "offers": {
         "@@type": "Offer",
@@ -202,7 +202,7 @@
         "availability": "{{ $product->stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
         "seller": {
             "@@type": "Organization",
-            "name": "Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh"
+            "name": "{{ $setting['company_name'] ?? 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh' }}"
         }
     }
 }

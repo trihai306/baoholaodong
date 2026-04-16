@@ -75,11 +75,11 @@
     "dateModified": "{{ $post->updated_at->toIso8601String() }}",
     "author": {
         "@@type": "Organization",
-        "name": "Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh"
+        "name": "{{ $setting['company_name'] ?? 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh' }}"
     },
     "publisher": {
         "@@type": "Organization",
-        "name": "Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh",
+        "name": "{{ $setting['company_name'] ?? 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh' }}",
         "logo": {
             "@@type": "ImageObject",
             "url": "{{ asset('images/logo.jpg') }}"

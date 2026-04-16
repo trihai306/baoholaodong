@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Giới thiệu - Bảo Hộ Lao Động')
-@section('meta_description', 'Giới thiệu Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh - Đơn vị chuyên cung cấp trang thiết bị bảo hộ lao động chính hãng, đạt tiêu chuẩn an toàn quốc tế tại Bắc Ninh.')
+@section('meta_description', 'Giới thiệu ' . ($setting['company_name'] ?? 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh') . ' - Đơn vị chuyên cung cấp trang thiết bị bảo hộ lao động chính hãng, đạt tiêu chuẩn an toàn quốc tế tại ' . ($setting['address_city'] ?? 'Bắc Ninh') . '.')
 @section('canonical', route('about'))
 
 @section('breadcrumb')
@@ -27,9 +27,9 @@
                         Công Ty TNHH Vật Tư<br>
                         <span class="text-primary-500">Tổng Hợp Lộc Thịnh</span>
                     </h1>
-                    <p class="text-secondary-400 text-sm mb-4"><i class="fas fa-id-card mr-1.5"></i>MST: 2301394954 | Giám đốc: Đỗ Quang Thịnh</p>
+                    <p class="text-secondary-400 text-sm mb-4"><i class="fas fa-id-card mr-1.5"></i>MST: {{ $setting['tax_code'] ?? '2301394954' }} | Giám đốc: {{ $setting['director_name'] ?? 'Đỗ Quang Thịnh' }}</p>
                     <p class="text-secondary-500 text-lg leading-relaxed mb-6">
-                        Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh chuyên cung cấp trang thiết bị bảo hộ lao động chính hãng, chất lượng cao, phục vụ các doanh nghiệp trên toàn quốc.
+                        {{ $setting['company_name'] ?? 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh' }} chuyên cung cấp trang thiết bị bảo hộ lao động chính hãng, chất lượng cao, phục vụ các doanh nghiệp trên toàn quốc.
                     </p>
                     <p class="text-secondary-500 leading-relaxed mb-8">
                         Chúng tôi cung cấp đầy đủ các sản phẩm bảo hộ lao động bao gồm: mũ bảo hộ, kính bảo hộ, găng tay, giày bảo hộ, quần áo bảo hộ, khẩu trang, dây đai an toàn và nhiều thiết bị bảo hộ khác cho mọi ngành nghề.
@@ -112,8 +112,8 @@
             <h2 class="text-3xl font-extrabold text-white mb-4">Hợp tác cùng chúng tôi</h2>
             <p class="text-primary-100 text-lg mb-8">Liên hệ ngay để được tư vấn giải pháp bảo hộ lao động phù hợp cho doanh nghiệp của bạn.</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="tel:0964186111" class="inline-flex items-center px-8 py-4 bg-white text-primary-600 font-bold rounded-xl hover:bg-primary-50 transition shadow-xl">
-                    <i class="fas fa-phone-alt mr-2"></i>0964.186.111
+                <a href="tel:{{ $setting['phone_primary'] ?? '0964186111' }}" class="inline-flex items-center px-8 py-4 bg-white text-primary-600 font-bold rounded-xl hover:bg-primary-50 transition shadow-xl">
+                    <i class="fas fa-phone-alt mr-2"></i>{{ $setting['phone_primary_display'] ?? '0964.186.111' }}
                 </a>
                 <a href="{{ route('contact') }}" class="inline-flex items-center px-8 py-4 bg-primary-700 text-white font-semibold rounded-xl hover:bg-primary-800 transition border border-primary-400">
                     <i class="fas fa-envelope mr-2"></i>Gửi yêu cầu

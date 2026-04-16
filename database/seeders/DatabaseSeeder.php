@@ -103,15 +103,28 @@ class DatabaseSeeder extends Seeder
 
         // Settings
         $settings = [
-            'site_name' => 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh',
-            'site_phone' => '0964.186.111',
-            'site_phone_2' => '0972.998.444',
-            'site_email' => 'thinhvtth.locthinh@gmail.com',
-            'site_address' => '074 LK KĐT HUD Trầu Cau, P. Võ Cường, Tỉnh Bắc Ninh',
-            'site_address_hq' => 'Tổ dân phố Bình Cầu, Phường Mão Điền, Tỉnh Bắc Ninh',
-            'site_mst' => '2301394954',
-            'site_director' => 'Đỗ Quang Thịnh',
-            'site_website' => 'www.locthinh.com',
+            'company_name'             => 'Công ty TNHH Vật Tư Tổng Hợp Lộc Thịnh',
+            'company_short_name'       => 'Lộc Thịnh',
+            'company_slogan'           => 'Vật Tư Bảo Hộ Lao Động Chất Lượng Cao',
+            'tax_code'                 => '2301394954',
+            'director_name'            => 'Đỗ Quang Thịnh',
+            'phone_primary'            => '0964186111',
+            'phone_primary_display'    => '0964.186.111',
+            'phone_secondary'          => '0972998444',
+            'phone_secondary_display'  => '0972.998.444',
+            'email'                    => 'thinhvtth.locthinh@gmail.com',
+            'address_hq'               => 'Tổ dân phố Bình Cầu, Phường Mão Điền, Tỉnh Bắc Ninh',
+            'address_office'           => '074 LK KĐT HUD Trầu Cau, P. Võ Cường, Bắc Ninh',
+            'address_city'             => 'Bắc Ninh',
+            'website'                  => 'www.locthinh.com',
+            'working_hours'            => 'T2 - T7: 8:00 - 17:30',
+            'facebook_url'             => '#',
+            'youtube_url'              => '#',
+            'tiktok_url'               => '#',
+            'instagram_url'            => '#',
+            'zalo_phone'               => '0964186111',
+            'facebook_messenger'       => 'locthinh.vn',
+            'logo'                     => null,
         ];
 
         foreach ($settings as $key => $value) {

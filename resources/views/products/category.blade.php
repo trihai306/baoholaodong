@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $category->name . ' - Bảo Hộ Lao Động')
-@section('meta_description', $category->description ?? 'Mua ' . $category->name . ' chính hãng, giá tốt tại Lộc Thịnh. Đa dạng mẫu mã, đạt tiêu chuẩn an toàn quốc tế. Hotline: 0964.186.111')
+@section('meta_description', $category->description ?? 'Mua ' . $category->name . ' chính hãng, giá tốt tại ' . ($setting['company_short_name'] ?? 'Lộc Thịnh') . '. Đa dạng mẫu mã, đạt tiêu chuẩn an toàn quốc tế. Hotline: ' . ($setting['phone_primary_display'] ?? '0964.186.111'))
 @section('canonical', route('products.category', $category->slug))
 
 @section('breadcrumb')

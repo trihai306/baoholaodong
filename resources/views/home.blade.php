@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Bảo Hộ Lao Động - Trang Thiết Bị An Toàn Chất Lượng Cao')
-@section('meta_description', 'Lộc Thịnh - Đơn vị uy tín #1 cung cấp trang thiết bị bảo hộ lao động chất lượng cao: mũ bảo hộ, kính bảo hộ, găng tay, giày bảo hộ, quần áo bảo hộ. Hotline: 0964.186.111')
+@section('meta_description', ($setting['company_short_name'] ?? 'Lộc Thịnh') . ' - Đơn vị uy tín #1 cung cấp trang thiết bị bảo hộ lao động chất lượng cao: mũ bảo hộ, kính bảo hộ, găng tay, giày bảo hộ, quần áo bảo hộ. Hotline: ' . ($setting['phone_primary_display'] ?? '0964.186.111'))
 @section('canonical', route('home'))
 
 @section('content')
@@ -320,8 +320,8 @@
             <h2 class="text-3xl lg:text-5xl font-black text-white mb-5 leading-tight">Cần báo giá <br class="sm:hidden">trang thiết bị bảo hộ?</h2>
             <p class="text-primary-100 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">Gọi ngay cho chúng tôi để được tư vấn miễn phí và nhận báo giá tốt nhất trong vòng 30 phút.</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="tel:0964186111" class="inline-flex items-center px-10 py-5 bg-white text-primary-600 font-black rounded-2xl hover:bg-primary-50 transition shadow-2xl text-lg">
-                    <i class="fas fa-phone-alt mr-3"></i>0964.186.111
+                <a href="tel:{{ $setting['phone_primary'] ?? '0964186111' }}" class="inline-flex items-center px-10 py-5 bg-white text-primary-600 font-black rounded-2xl hover:bg-primary-50 transition shadow-2xl text-lg">
+                    <i class="fas fa-phone-alt mr-3"></i>{{ $setting['phone_primary_display'] ?? '0964.186.111' }}
                 </a>
                 <a href="{{ route('contact') }}" class="inline-flex items-center px-10 py-5 bg-white/10 text-white font-bold rounded-2xl hover:bg-white/20 transition border-2 border-white/20 text-lg">
                     <i class="fas fa-envelope mr-3"></i>Gửi yêu cầu
