@@ -17,7 +17,7 @@ class ManageSettings extends Page
     protected static ?string $navigationLabel = 'Cài đặt chung';
     protected static ?string $title = 'Cài đặt chung';
     protected static ?int $navigationSort = 10;
-    protected static string $view = 'filament.pages.manage-settings';
+    protected string $view = 'filament.pages.manage-settings';
 
     public ?array $data = [];
 
