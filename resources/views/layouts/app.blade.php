@@ -209,29 +209,59 @@
                         </a>
                     @endforeach
 
-                    {{-- Mega Menu --}}
-                    <div class="relative mega-trigger">
+                    {{-- Mega Menu with Parent-Child --}}
+                    <div class="relative mega-trigger" x-data="{ activeCategory: null }" @mouseenter="activeCategory = activeCategory || ({{ $navCategories->first()?->id ?? 'null' }})" @mouseleave="activeCategory = null">
                         <a href="{{ route('products.index') }}"
                            class="px-4 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 flex items-center
                            {{ request()->routeIs('products.*') ? 'text-primary-600 bg-primary-50' : 'text-dark-600 hover:text-primary-600 hover:bg-primary-50/60' }}">
                             Sản phẩm <i class="fas fa-chevron-down ml-1.5 text-[10px]"></i>
                         </a>
-                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[600px]">
-                            <div class="bg-white rounded-2xl shadow-2xl shadow-dark-900/10 border border-dark-100 p-6">
-                                <div class="grid grid-cols-3 gap-2">
-                                    @foreach($navCategories as $cat)
-                                    <a href="{{ route('products.category', $cat->slug) }}" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-primary-50 transition group">
-                                        <div class="w-10 h-10 bg-gradient-to-br from-primary-50 to-primary-100 group-hover:from-primary-100 group-hover:to-primary-200 rounded-xl flex items-center justify-center shrink-0 transition">
-                                            <i class="fas fa-hard-hat text-primary-500 text-sm"></i>
+                        <div class="mega-menu absolute top-full left-0 pt-4 w-[620px]">
+                            <div class="bg-white rounded-2xl shadow-2xl shadow-dark-900/10 border border-dark-100 overflow-hidden">
+                                <div class="flex min-h-[360px]">
+                                    {{-- Left: Parent Categories --}}
+                                    <div class="w-[220px] bg-gray-50/80 border-r border-dark-100 py-3">
+                                        @foreach($navCategories as $cat)
+                                        <a href="{{ route('products.category', $cat->slug) }}"
+                                           class="flex items-center justify-between px-4 py-2.5 text-[13px] font-semibold transition-all duration-150 cursor-pointer"
+                                           :class="activeCategory === {{ $cat->id }} ? 'text-primary-600 bg-white border-r-2 border-primary-500' : 'text-dark-700 hover:text-primary-600 hover:bg-white/60'"
+                                           @mouseenter="activeCategory = {{ $cat->id }}">
+                                            <span>{{ $cat->name }}</span>
+                                            @if($cat->children->count() > 0)
+                                                <i class="fas fa-chevron-right text-[9px] opacity-40"></i>
+                                            @endif
+                                        </a>
+                                        @endforeach
+                                    </div>
+                                    {{-- Right: Child Categories --}}
+                                    <div class="flex-1 p-5">
+                                        @foreach($navCategories as $cat)
+                                        <div x-show="activeCategory === {{ $cat->id }}" x-cloak>
+                                            <div class="text-xs font-bold text-dark-400 uppercase tracking-wider mb-3">{{ $cat->name }}</div>
+                                            @if($cat->children->count() > 0)
+                                                <div class="grid grid-cols-2 gap-1">
+                                                    @foreach($cat->children->where('is_active', true)->sortBy('sort_order') as $child)
+                                                    <a href="{{ route('products.category', $child->slug) }}" class="flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-primary-50 transition group">
+                                                        <div class="w-8 h-8 bg-gradient-to-br from-primary-50 to-primary-100 group-hover:from-primary-100 group-hover:to-primary-200 rounded-lg flex items-center justify-center shrink-0 transition">
+                                                            <i class="fas fa-box text-primary-500 text-xs"></i>
+                                                        </div>
+                                                        <span class="text-[13px] text-dark-700 group-hover:text-primary-600 font-medium transition">{{ $child->name }}</span>
+                                                    </a>
+                                                    @endforeach
+                                                </div>
+                                            @else
+                                                <p class="text-sm text-dark-400">Chưa có danh mục con</p>
+                                            @endif
+                                            <div class="mt-4 pt-3 border-t border-dark-100">
+                                                <a href="{{ route('products.category', $cat->slug) }}" class="text-primary-500 hover:text-primary-600 text-[13px] font-semibold transition">
+                                                    Xem tất cả {{ $cat->name }} <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div class="text-sm font-semibold text-dark-800 group-hover:text-primary-600 transition">{{ $cat->name }}</div>
-                                            <div class="text-[11px] text-dark-400">{{ $cat->products->count() }} sản phẩm</div>
-                                        </div>
-                                    </a>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="mt-4 pt-4 border-t border-dark-100 text-center">
+                                <div class="border-t border-dark-100 px-5 py-3 bg-gray-50/50 text-center">
                                     <a href="{{ route('products.index') }}" class="text-primary-500 hover:text-primary-600 text-sm font-semibold transition">
                                         Xem tất cả sản phẩm <i class="fas fa-arrow-right ml-1"></i>
                                     </a>

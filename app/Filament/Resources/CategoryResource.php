@@ -39,11 +39,14 @@ class CategoryResource extends Resource
                     ->required()
                     ->unique(ignoreRecord: true),
                 Forms\Components\Select::make('parent_id')
-                    ->label('Danh m���c cha')
-                    ->relationship('parent', 'name')
+                    ->label('Danh mục cha')
+                    ->relationship('parent', 'name', fn ($query, $record) =>
+                        $query->whereNull('parent_id')
+                            ->when($record, fn ($q) => $q->where('id', '!=', $record->id))
+                    )
                     ->searchable()
                     ->preload()
-                    ->placeholder('-- Kh��ng có --'),
+                    ->placeholder('-- Không có (là danh mục gốc) --'),
                 Forms\Components\Textarea::make('description')
                     ->label('Mô tả')
                     ->rows(3),
@@ -68,15 +71,36 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image')->label('Ảnh')->disk('public')->circular(),
-                Tables\Columns\TextColumn::make('name')->label('Tên')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('parent.name')->label('Danh mục cha')->placeholder('-'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Tên')
+                    ->searchable()
+                    ->sortable()
+                    ->formatStateUsing(function ($state, $record) {
+                        if ($record->parent_id) {
+                            return '↳ ' . $state;
+                        }
+                        return $state;
+                    })
+                    ->weight(fn ($record) => $record->parent_id ? null : 'bold')
+                    ->color(fn ($record) => $record->parent_id ? 'gray' : null),
+                Tables\Columns\TextColumn::make('parent.name')->label('Danh mục cha')->placeholder('— Danh mục gốc —'),
+                Tables\Columns\TextColumn::make('children_count')->counts('children')->label('Danh mục con'),
                 Tables\Columns\TextColumn::make('products_count')->counts('products')->label('Sản phẩm'),
                 Tables\Columns\TextColumn::make('sort_order')->label('Thứ tự')->sortable(),
                 Tables\Columns\ToggleColumn::make('is_active')->label('Hiển thị'),
             ])
             ->defaultSort('sort_order')
+            ->modifyQueryUsing(function ($query) {
+                return $query
+                    ->orderByRaw('COALESCE(parent_id, id), parent_id IS NOT NULL, sort_order');
+            })
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_active')->label('Hiển thị'),
+                Tables\Filters\SelectFilter::make('parent_id')
+                    ->label('Danh mục cha')
+                    ->relationship('parent', 'name')
+                    ->placeholder('Tất cả')
+                    ->preload(),
             ])
             ->actions([
                 Actions\EditAction::make(),
