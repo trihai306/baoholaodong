@@ -28,10 +28,24 @@
                     <div class="p-2">
                         @foreach($categories as $cat)
                             <a href="{{ route('products.category', $cat->slug) }}"
-                               class="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium transition
-                               {{ $cat->id == $category->id ? 'bg-primary-50 text-primary-600' : 'text-secondary-600 hover:bg-secondary-50 hover:text-primary-600' }}">
+                               class="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-semibold transition
+                               {{ $cat->id == $category->id || $category->parent_id == $cat->id ? 'bg-primary-50 text-primary-600' : 'text-secondary-700 hover:bg-secondary-50 hover:text-primary-600' }}">
                                 <span>{{ $cat->name }}</span>
+                                @if($cat->children->where('is_active', true)->count())
+                                    <span class="text-xs text-secondary-400">{{ $cat->children->where('is_active', true)->count() }}</span>
+                                @endif
                             </a>
+                            @if($cat->children->where('is_active', true)->count())
+                                <div class="ml-3 border-l-2 border-secondary-100 pl-2 mb-1">
+                                    @foreach($cat->children->where('is_active', true)->sortBy('sort_order') as $child)
+                                        <a href="{{ route('products.category', $child->slug) }}"
+                                           class="flex items-center px-3 py-2 rounded-lg text-[13px] font-medium transition
+                                           {{ $child->id == $category->id ? 'bg-primary-50 text-primary-600' : 'text-secondary-500 hover:bg-secondary-50 hover:text-primary-600' }}">
+                                            <span>{{ $child->name }}</span>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>

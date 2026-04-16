@@ -53,8 +53,15 @@ class ProductController extends Controller
 
     public function category(string $slug)
     {
-        $category = Category::where('slug', $slug)->active()->firstOrFail();
-        $products = Product::active()->where('category_id', $category->id)->latest()->paginate(12);
+        $category = Category::where('slug', $slug)->active()->with('children')->firstOrFail();
+
+        // If parent category, show products from this category AND all children
+        $categoryIds = collect([$category->id]);
+        if ($category->children->count()) {
+            $categoryIds = $categoryIds->merge($category->children->pluck('id'));
+        }
+
+        $products = Product::active()->whereIn('category_id', $categoryIds)->latest()->paginate(12);
         $categories = Category::active()->parentCategories()->with('children')->orderBy('sort_order')->get();
 
         return view('products.category', compact('category', 'products', 'categories'));
