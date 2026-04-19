@@ -6,61 +6,56 @@
 
 @section('content')
     {{-- Hero Section --}}
-    <section class="relative bg-dark-950 overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center">
-        {{-- Animated background --}}
+    <section class="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center">
         <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-gradient-to-br from-dark-900 via-dark-950 to-dark-900"></div>
-            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-500/5 rounded-full blur-[120px]"></div>
-            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px]"></div>
-            <div class="absolute inset-0" style="background-image: radial-gradient(rgba(255,255,255,.03) 1px, transparent 1px); background-size: 40px 40px;"></div>
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-100/20 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-100/15 rounded-full blur-[100px]"></div>
+            <div class="absolute inset-0" style="background-image: radial-gradient(rgba(0,0,0,.03) 1px, transparent 1px); background-size: 40px 40px;"></div>
         </div>
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-0 w-full">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div class="animate-fade-in">
-                    <div class="inline-flex items-center px-4 py-2 glass text-primary-400 text-xs font-semibold rounded-full mb-8 tracking-wide uppercase">
+                    <div class="inline-flex items-center px-4 py-2 bg-primary-50 text-primary-600 text-xs font-semibold rounded-full mb-8 tracking-wide uppercase border border-primary-100">
                         <span class="w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
                         Đơn vị uy tín #1 Việt Nam
                     </div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-black text-white leading-[1.1] mb-6 tracking-tight">
+                    <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-black text-dark-900 leading-[1.1] mb-6 tracking-tight">
                         Trang Thiết Bị<br>
                         <span class="gradient-text">Bảo Hộ Lao Động</span><br>
-                        <span class="text-dark-300 text-3xl sm:text-4xl lg:text-[2.5rem]">Chất Lượng Quốc Tế</span>
+                        <span class="text-dark-500 text-3xl sm:text-4xl lg:text-[2.5rem]">Chất Lượng Quốc Tế</span>
                     </h1>
-                    <p class="text-lg text-dark-400 mb-10 max-w-lg leading-relaxed">
-                        Cung cấp <strong class="text-dark-200">1,000+ sản phẩm</strong> bảo hộ chính hãng từ các thương hiệu hàng đầu thế giới. Phục vụ <strong class="text-dark-200">5,000+ doanh nghiệp</strong> trên toàn quốc.
+                    <p class="text-lg text-dark-500 mb-10 max-w-lg leading-relaxed">
+                        Cung cấp <strong class="text-dark-800">1,000+ sản phẩm</strong> bảo hộ chính hãng từ các thương hiệu hàng đầu thế giới. Phục vụ <strong class="text-dark-800">5,000+ doanh nghiệp</strong> trên toàn quốc.
                     </p>
                     <div class="flex flex-wrap gap-4 mb-10">
-                        <a href="{{ route('products.index') }}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold rounded-2xl transition-all shadow-xl shadow-primary-500/25 hover:shadow-primary-500/40 hover:-translate-y-1 text-sm">
+                        <a href="{{ route('products.index') }}" class="inline-flex items-center px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg text-sm">
                             <i class="fas fa-shopping-bag mr-2.5"></i>Xem sản phẩm
                         </a>
-                        <a href="{{ route('contact') }}" class="inline-flex items-center px-8 py-4 glass text-white font-bold rounded-2xl transition-all hover:bg-white/10 text-sm">
-                            <i class="fas fa-headset mr-2.5"></i>Tư vấn miễn phí
+                        <a href="{{ route('contact') }}" class="inline-flex items-center px-8 py-4 bg-white text-dark-700 font-bold rounded-xl transition-all hover:bg-dark-50 text-sm border border-dark-200 shadow-sm">
+                            <i class="fas fa-headset mr-2.5 text-dark-400"></i>Tư vấn miễn phí
                         </a>
                     </div>
-                    {{-- Trust badges --}}
                     <div class="flex items-center space-x-6 text-dark-500 text-xs">
                         @foreach(['Miễn phí vận chuyển', 'Bảo hành chính hãng', 'Đổi trả 30 ngày'] as $badge)
-                        <div class="flex items-center"><i class="fas fa-check-circle text-primary-500 mr-1.5"></i>{{ $badge }}</div>
+                        <div class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-1.5"></i>{{ $badge }}</div>
                         @endforeach
                     </div>
                 </div>
                 <div class="hidden lg:block relative">
                     <div class="relative">
-                        {{-- Floating cards --}}
-                        <div class="absolute -top-6 -left-6 glass rounded-2xl p-5 animate-float z-10 shadow-xl">
+                        <div class="absolute -top-6 -left-6 bg-white rounded-2xl p-5 animate-float z-10 shadow-md border border-dark-100">
                             <div class="flex items-center space-x-3">
-                                <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center"><i class="fas fa-shield-alt text-green-400 text-xl"></i></div>
-                                <div><div class="text-white font-bold text-sm">An Toàn 100%</div><div class="text-dark-400 text-xs">Tiêu chuẩn quốc tế</div></div>
+                                <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center"><i class="fas fa-shield-alt text-green-500 text-xl"></i></div>
+                                <div><div class="text-dark-800 font-bold text-sm">An Toàn 100%</div><div class="text-dark-400 text-xs">Tiêu chuẩn quốc tế</div></div>
                             </div>
                         </div>
-                        <div class="absolute -bottom-4 -right-4 glass rounded-2xl p-5 animate-float-delay z-10 shadow-xl">
+                        <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl p-5 animate-float-delay z-10 shadow-md border border-dark-100">
                             <div class="flex items-center space-x-3">
-                                <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center"><i class="fas fa-truck text-primary-400 text-xl"></i></div>
-                                <div><div class="text-white font-bold text-sm">Giao Nhanh</div><div class="text-dark-400 text-xs">Toàn quốc 2-5 ngày</div></div>
+                                <div class="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center"><i class="fas fa-truck text-primary-500 text-xl"></i></div>
+                                <div><div class="text-dark-800 font-bold text-sm">Giao Nhanh</div><div class="text-dark-400 text-xs">Toàn quốc 2-5 ngày</div></div>
                             </div>
                         </div>
-                        {{-- Main grid --}}
                         <div class="grid grid-cols-2 gap-5">
                             @foreach([
                                 ['icon' => 'fa-hard-hat', 'name' => 'Mũ bảo hộ', 'count' => '50+'],
@@ -68,12 +63,12 @@
                                 ['icon' => 'fa-mitten', 'name' => 'Găng tay', 'count' => '80+'],
                                 ['icon' => 'fa-shoe-prints', 'name' => 'Giày bảo hộ', 'count' => '60+'],
                             ] as $i => $item)
-                            <div class="glass rounded-2xl p-6 text-center hover:bg-white/10 transition-all {{ $i % 2 == 1 ? 'mt-8' : '' }}">
-                                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary-500/20 to-primary-600/20 rounded-2xl flex items-center justify-center">
-                                    <i class="fas {{ $item['icon'] }} text-primary-400 text-2xl"></i>
+                            <div class="bg-white rounded-2xl p-6 text-center hover:shadow-md transition-all border border-dark-100 {{ $i % 2 == 1 ? 'mt-8' : '' }}">
+                                <div class="w-16 h-16 mx-auto mb-4 bg-dark-50 rounded-2xl flex items-center justify-center">
+                                    <i class="fas {{ $item['icon'] }} text-primary-500 text-2xl"></i>
                                 </div>
-                                <div class="text-white font-bold text-sm">{{ $item['name'] }}</div>
-                                <div class="text-dark-500 text-xs mt-1">{{ $item['count'] }} mẫu</div>
+                                <div class="text-dark-800 font-bold text-sm">{{ $item['name'] }}</div>
+                                <div class="text-dark-400 text-xs mt-1">{{ $item['count'] }} mẫu</div>
                             </div>
                             @endforeach
                         </div>
@@ -171,29 +166,29 @@
     @endif
 
     {{-- Why Choose Us --}}
-    <section class="py-20 lg:py-28 bg-dark-950 relative overflow-hidden">
+    <section class="py-20 lg:py-28 bg-gray-50 relative overflow-hidden">
         <div class="absolute inset-0">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-500/5 rounded-full blur-[150px]"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/80 rounded-full blur-[150px]"></div>
         </div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
-                <div class="inline-flex items-center px-4 py-1.5 bg-white/5 border border-white/10 text-primary-400 text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">Uy tín</div>
-                <h2 class="text-3xl lg:text-4xl font-black text-white mb-3">Tại sao chọn chúng tôi?</h2>
-                <p class="text-dark-400 max-w-2xl mx-auto">Cam kết mang đến sản phẩm tốt nhất với dịch vụ hoàn hảo nhất</p>
+                <div class="inline-flex items-center px-4 py-1.5 bg-primary-50 border border-primary-100 text-primary-600 text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">Uy tín</div>
+                <h2 class="text-3xl lg:text-4xl font-black text-dark-900 mb-3">Tại sao chọn chúng tôi?</h2>
+                <p class="text-dark-500 max-w-2xl mx-auto">Cam kết mang đến sản phẩm tốt nhất với dịch vụ hoàn hảo nhất</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach([
-                    ['icon' => 'fa-certificate', 'gradient' => 'from-yellow-400 to-orange-500', 'shadow' => 'shadow-orange-500/20', 'title' => 'Chất lượng đảm bảo', 'desc' => 'Sản phẩm chính hãng 100%, đạt tiêu chuẩn EN, ANSI, ISO quốc tế'],
-                    ['icon' => 'fa-tags', 'gradient' => 'from-green-400 to-emerald-500', 'shadow' => 'shadow-green-500/20', 'title' => 'Giá tốt nhất', 'desc' => 'Cam kết giá cạnh tranh, chiết khấu lớn cho đơn hàng số lượng'],
-                    ['icon' => 'fa-shipping-fast', 'gradient' => 'from-blue-400 to-cyan-500', 'shadow' => 'shadow-blue-500/20', 'title' => 'Giao hàng nhanh', 'desc' => 'Miễn phí nội thành, giao toàn quốc chỉ 2-5 ngày làm việc'],
-                    ['icon' => 'fa-headset', 'gradient' => 'from-purple-400 to-pink-500', 'shadow' => 'shadow-purple-500/20', 'title' => 'Hỗ trợ 24/7', 'desc' => 'Đội ngũ chuyên gia tư vấn nhiệt tình, sẵn sàng hỗ trợ mọi lúc'],
+                    ['icon' => 'fa-certificate', 'color' => 'text-primary-500', 'bg' => 'bg-primary-50', 'title' => 'Chất lượng đảm bảo', 'desc' => 'Sản phẩm chính hãng 100%, đạt tiêu chuẩn EN, ANSI, ISO quốc tế'],
+                    ['icon' => 'fa-tags', 'color' => 'text-green-500', 'bg' => 'bg-green-50', 'title' => 'Giá tốt nhất', 'desc' => 'Cam kết giá cạnh tranh, chiết khấu lớn cho đơn hàng số lượng'],
+                    ['icon' => 'fa-shipping-fast', 'color' => 'text-blue-500', 'bg' => 'bg-blue-50', 'title' => 'Giao hàng nhanh', 'desc' => 'Miễn phí nội thành, giao toàn quốc chỉ 2-5 ngày làm việc'],
+                    ['icon' => 'fa-headset', 'color' => 'text-purple-500', 'bg' => 'bg-purple-50', 'title' => 'Hỗ trợ 24/7', 'desc' => 'Đội ngũ chuyên gia tư vấn nhiệt tình, sẵn sàng hỗ trợ mọi lúc'],
                 ] as $feature)
-                <div class="glass rounded-2xl p-8 text-center hover:bg-white/10 transition-all duration-300 group animate-on-scroll card-hover">
-                    <div class="w-16 h-16 mx-auto mb-6 bg-gradient-to-br {{ $feature['gradient'] }} rounded-2xl flex items-center justify-center shadow-lg {{ $feature['shadow'] }} group-hover:scale-110 transition-transform">
-                        <i class="fas {{ $feature['icon'] }} text-white text-2xl"></i>
+                <div class="bg-white rounded-2xl p-8 text-center border border-dark-100 hover:shadow-md transition-all duration-300 group animate-on-scroll card-hover">
+                    <div class="w-14 h-14 mx-auto mb-6 {{ $feature['bg'] }} rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
+                        <i class="fas {{ $feature['icon'] }} {{ $feature['color'] }} text-xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3">{{ $feature['title'] }}</h3>
-                    <p class="text-dark-400 text-sm leading-relaxed">{{ $feature['desc'] }}</p>
+                    <h3 class="text-lg font-bold text-dark-800 mb-3">{{ $feature['title'] }}</h3>
+                    <p class="text-dark-500 text-sm leading-relaxed">{{ $feature['desc'] }}</p>
                 </div>
                 @endforeach
             </div>
@@ -239,7 +234,7 @@
                         ['name' => 'Lê Văn C', 'role' => 'Chủ cửa hàng BHLD Miền Nam', 'text' => 'Nguồn hàng phong phú, giá sỉ cạnh tranh. Hỗ trợ đổi trả nhanh chóng khi có vấn đề.', 'rating' => 5],
                     ] as $review)
                     <div class="swiper-slide">
-                        <div class="bg-dark-50 rounded-2xl p-8 h-full border border-dark-100">
+                        <div class="bg-white rounded-2xl p-8 h-full border border-dark-100">
                             <div class="flex mb-4">
                                 @for($i = 0; $i < $review['rating']; $i++)
                                 <i class="fas fa-star text-yellow-400 text-sm mr-0.5"></i>
@@ -308,7 +303,7 @@
     @endif
 
     {{-- CTA --}}
-    <section class="py-20 lg:py-24 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 relative overflow-hidden">
+    <section class="py-20 lg:py-24 bg-primary-500 relative overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px]"></div>
             <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-[80px]"></div>

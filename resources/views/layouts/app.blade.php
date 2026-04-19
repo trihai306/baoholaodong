@@ -48,6 +48,8 @@
                     colors: {
                         primary: { 50:'#fff7ed',100:'#ffedd5',200:'#fed7aa',300:'#fdba74',400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c',800:'#9a3412',900:'#7c2d12' },
                         dark: { 50:'#f8fafc',100:'#f1f5f9',200:'#e2e8f0',300:'#cbd5e1',400:'#94a3b8',500:'#64748b',600:'#475569',700:'#334155',800:'#1e293b',900:'#0f172a',950:'#020617' },
+                        secondary: { 50:'#fafaf9',100:'#f5f5f4',200:'#e7e5e4',300:'#d6d3d1',400:'#a8a29e',500:'#78716c',600:'#57534e',700:'#44403c',800:'#292524',900:'#1c1917',950:'#0c0a09' },
+                        accent: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a' },
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -83,7 +85,7 @@
 
         /* Smooth card hover */
         .card-hover { transition: all .35s cubic-bezier(.25,.8,.25,1); }
-        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 60px -15px rgba(0,0,0,.15); }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 30px -10px rgba(0,0,0,.1); }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -156,12 +158,12 @@
 
     {{-- Back to top --}}
     <button onclick="window.scrollTo({top:0,behavior:'smooth'})" id="backToTop"
-            class="fixed bottom-6 right-6 w-12 h-12 bg-dark-800 hover:bg-primary-500 text-white rounded-full shadow-xl hidden items-center justify-center transition-all z-50 hover:scale-110">
+            class="fixed bottom-6 right-6 w-12 h-12 bg-dark-700 hover:bg-primary-500 text-white rounded-full shadow-lg hidden items-center justify-center transition-all z-50 hover:scale-110">
         <i class="fas fa-arrow-up text-sm"></i>
     </button>
 
     {{-- Top Bar --}}
-    <div class="bg-dark-900 text-dark-400 text-xs hidden lg:block">
+    <div class="bg-dark-800 text-dark-400 text-xs hidden lg:block">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex justify-between items-center">
             <div class="flex items-center divide-x divide-dark-700">
                 <a href="tel:{{ $setting['phone_primary'] ?? '0964186111' }}" class="hover:text-primary-400 transition pr-5 flex items-center"><i class="fas fa-phone-alt mr-1.5 text-primary-500"></i>Hotline: <strong class="ml-1 text-white">{{ $setting['phone_primary_display'] ?? '0964.186.111' }}</strong></a>
@@ -171,16 +173,16 @@
             <div class="flex items-center space-x-4">
                 <span class="flex items-center"><i class="far fa-clock mr-1.5 text-primary-500"></i>{{ $setting['working_hours'] ?? 'T2 - T7: 8:00 - 17:30' }}</span>
                 <div class="flex items-center space-x-2 ml-4 pl-4 border-l border-dark-700">
-                    <a href="{{ $setting['facebook_url'] ?? '#' }}" class="w-7 h-7 bg-dark-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition text-[10px]"><i class="fab fa-facebook-f"></i></a>
-                    <a href="{{ $setting['youtube_url'] ?? '#' }}" class="w-7 h-7 bg-dark-800 hover:bg-red-500 rounded-full flex items-center justify-center transition text-[10px]"><i class="fab fa-youtube"></i></a>
-                    <a href="{{ $setting['tiktok_url'] ?? '#' }}" class="w-7 h-7 bg-dark-800 hover:bg-pink-500 rounded-full flex items-center justify-center transition text-[10px]"><i class="fab fa-tiktok"></i></a>
+                    <a href="{{ $setting['facebook_url'] ?? '#' }}" class="w-7 h-7 bg-dark-700 hover:bg-primary-500 rounded-full flex items-center justify-center transition text-[10px] text-dark-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{ $setting['youtube_url'] ?? '#' }}" class="w-7 h-7 bg-dark-700 hover:bg-primary-500 rounded-full flex items-center justify-center transition text-[10px] text-dark-300 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    <a href="{{ $setting['tiktok_url'] ?? '#' }}" class="w-7 h-7 bg-dark-700 hover:bg-primary-500 rounded-full flex items-center justify-center transition text-[10px] text-dark-300 hover:text-white"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
     </div>
 
     {{-- Header --}}
-    <header class="bg-white/95 backdrop-blur-lg sticky top-0 z-50 border-b border-dark-100" x-data="{ searchOpen: false }">
+    <header class="bg-white/95 backdrop-blur-lg sticky top-0 z-50 shadow-sm shadow-dark-100/50" x-data="{ searchOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 lg:h-[72px]">
                 {{-- Logo --}}
@@ -355,23 +357,25 @@
     <main>@yield('content')</main>
 
     {{-- Footer --}}
-    <footer class="bg-dark-950 text-dark-400 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=40 height=40 viewBox=%220 0 40 40%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M0 0h1v1H0z%22 fill=%22%23fff%22 fill-opacity=%22.02%22/%3E%3C/svg%3E')]"></div>
+    <footer class="bg-gradient-to-b from-dark-900 to-dark-950 text-dark-400 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=40 height=40 viewBox=%220 0 40 40%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M0 0h1v1H0z%22 fill=%22%23fff%22 fill-opacity=%22.03%22/%3E%3C/svg%3E')]"></div>
         <div class="relative">
             {{-- Newsletter --}}
-            <div class="border-b border-dark-800/50">
+            <div class="border-b border-white/10">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
-                        <div class="text-center lg:text-left">
-                            <h3 class="text-2xl font-bold text-white mb-2">Nhận thông tin khuyến mãi</h3>
-                            <p class="text-dark-400 text-sm">Đăng ký để nhận ưu đãi và thông tin sản phẩm mới nhất</p>
+                    <div class="bg-white/5 rounded-2xl p-8 lg:p-10 border border-white/10">
+                        <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                            <div class="text-center lg:text-left">
+                                <h3 class="text-2xl font-bold text-white mb-2">Nhận thông tin khuyến mãi</h3>
+                                <p class="text-dark-400 text-sm">Đăng ký để nhận ưu đãi và thông tin sản phẩm mới nhất</p>
+                            </div>
+                            <form class="flex w-full max-w-md">
+                                <input type="email" placeholder="Email của bạn..." class="flex-1 px-5 py-3.5 bg-dark-800 border border-dark-700 text-white text-sm rounded-l-xl focus:outline-none focus:border-primary-500 placeholder-dark-500 transition">
+                                <button type="submit" class="px-6 py-3.5 bg-primary-500 hover:bg-primary-600 text-white font-bold text-sm rounded-r-xl transition whitespace-nowrap">
+                                    Đăng ký
+                                </button>
+                            </form>
                         </div>
-                        <form class="flex w-full max-w-md">
-                            <input type="email" placeholder="Email của bạn..." class="flex-1 px-5 py-3.5 bg-dark-800 border border-dark-700 text-white text-sm rounded-l-xl focus:outline-none focus:border-primary-500 placeholder-dark-500 transition">
-                            <button type="submit" class="px-6 py-3.5 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold text-sm rounded-r-xl transition whitespace-nowrap">
-                                Đăng ký
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>

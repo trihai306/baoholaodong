@@ -27,7 +27,7 @@
         <div class="bg-white rounded-3xl border border-dark-100 overflow-hidden shadow-sm">
             <div class="lg:grid lg:grid-cols-5">
                 {{-- Image --}}
-                <div class="lg:col-span-2 p-6 lg:p-10 bg-gradient-to-br from-dark-50 to-dark-100/50 flex items-center justify-center relative">
+                <div class="lg:col-span-2 p-6 lg:p-10 bg-gray-50 flex items-center justify-center relative">
                     @if($product->sale_price)
                     <div class="absolute top-6 left-6 bg-red-500 text-white text-sm font-bold px-4 py-2 rounded-xl shadow-lg shadow-red-500/30">
                         -{{ round((($product->price - $product->sale_price) / $product->price) * 100) }}% OFF

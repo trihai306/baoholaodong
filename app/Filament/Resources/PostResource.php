@@ -11,6 +11,7 @@ use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
 use Filament\Tables\Table;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Support\Str;
 
 class PostResource extends Resource
@@ -42,8 +43,11 @@ class PostResource extends Resource
                     Forms\Components\Textarea::make('excerpt')
                         ->label('Tóm tắt')
                         ->rows(2),
-                    Forms\Components\RichEditor::make('content')
+                    TiptapEditor::make('content')
                         ->label('Nội dung')
+                        ->profile('post')
+                        ->disk('public')
+                        ->directory('posts')
                         ->required()
                         ->columnSpanFull(),
                 ])->columns(2),

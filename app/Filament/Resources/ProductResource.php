@@ -11,6 +11,7 @@ use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
 use Filament\Tables\Table;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Support\Str;
 
 class ProductResource extends Resource
@@ -54,8 +55,11 @@ class ProductResource extends Resource
                     Forms\Components\Textarea::make('short_description')
                         ->label('Mô tả ngắn')
                         ->rows(2),
-                    Forms\Components\RichEditor::make('description')
+                    TiptapEditor::make('description')
                         ->label('Mô tả chi tiết')
+                        ->profile('product')
+                        ->disk('public')
+                        ->directory('products')
                         ->columnSpanFull(),
                 ]),
 

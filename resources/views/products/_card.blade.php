@@ -4,17 +4,15 @@
             @if($product->image)
                 <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="{{ $product->name }}" loading="lazy">
             @else
-                <div class="w-full h-full bg-gradient-to-br from-dark-50 to-dark-100 flex items-center justify-center">
+                <div class="w-full h-full bg-dark-50 flex items-center justify-center">
                     <i class="fas fa-image text-4xl text-dark-200"></i>
                 </div>
             @endif
-            {{-- Overlay --}}
             <div class="absolute inset-0 bg-gradient-to-t from-dark-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-4">
                 <span class="inline-flex items-center px-5 py-2.5 bg-white text-dark-800 text-xs font-bold rounded-xl shadow-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                     <i class="fas fa-eye mr-1.5"></i>Xem chi tiết
                 </span>
             </div>
-            {{-- Badges --}}
             <div class="absolute top-3 left-3 flex flex-col gap-1.5">
                 @if($product->sale_price)
                 <span class="inline-flex items-center px-2.5 py-1 bg-red-500 text-white text-[10px] font-bold rounded-lg shadow-lg shadow-red-500/30">
@@ -22,7 +20,7 @@
                 </span>
                 @endif
                 @if($product->is_featured)
-                <span class="inline-flex items-center px-2.5 py-1 bg-primary-500 text-white text-[10px] font-bold rounded-lg shadow-lg shadow-primary-500/30">
+                <span class="inline-flex items-center px-2.5 py-1 bg-primary-500 text-white text-[10px] font-bold rounded-lg">
                     <i class="fas fa-fire mr-1"></i>Hot
                 </span>
                 @endif
